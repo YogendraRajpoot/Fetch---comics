@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgba(189,57,62,255);
+            height: 850px;
+            width: 100%;
+        }
+        /* nav{
+            height: 30px;
+            width: auto;
+            background-color: white;
+
+        }
+        body>nav>ul{
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+        }
+        body>nav>ul li{
+            margin-left: 12px;
+        } */
+        #container{
+            margin-top: 2%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-row-gap: 50px;
+            justify-items: center;
+        }
+        #container div{
+            border: 2px solid black;
+            font-size: larger;            
+            text-align: center;
+            height: 300px;
+            width: 300px;
+            background-color: rgb(247, 202, 201);
+            padding: 20px;
+        }
+        img{
+            height: 200px;
+            width: 200px;
+        }
+        @media (max-width: 1124px) {
+            #container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-row-gap: 50px;
+            justify-items: center;
+        }
+        }
+        @media (max-width: 812px) {
+            #container{
+            margin-top: 2%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        }
+
+  
+</style>
+</head>
+
+<body>
+    <!-- <nav>
+        <ul>
+            <li>HOME</li>
+            <li>ABOUT</li>
+            <li>CONTACT</li>            
+        </ul>
+
+    </nav> -->
+    <div id="container">
+    </div>
+</body>
+
+</html>
+
+<script>
+    // var url1 = "https://xkcd.vercel.app/?comic=latest"
+    // var url2 = "https://fakestoreapi.com/products"
+    var url3 = "https://reqres.in/api/users"
+
+    fetch(url3).then(function (res) {
+        // console.log('res:', res)
+        return res.json()
+    })
+    .then(function (finalRes) {
+        // console.log("finalRes:", finalRes)
+        appendProduct(finalRes.data)
+    })
+        .catch(function (err) {
+            console.log('err:', err)
+
+        })
+
+    var div = document.getElementById('container')
+    function appendProduct(data){
+        data.forEach(function(element){
+            console.log("data:" , element)
+
+            var div = document.createElement('div')
+            var image = document.createElement('img')
+            image.src = element.avatar
+
+            var Name = document.createElement('p')
+            Name.innerText = `${element.first_name} ${element.second_name}`
+
+            var email = document.createElement('p')
+            email.innerText = `Email:-${element.email}`
+
+            div.append(image, Name, email)
+            container.append(div)
+            
+        });
+
+    }
+
+
+    // function appendProduct(data){
+    //     data.forEach(function(element)  {
+    //         console.log("element : ",element)
+
+            // var div = document.createElement('div')
+
+            // var image = document.createElement('img')
+            // image.src = element.image
+
+            // var title = document.createElement('p')
+            // title.innerText = element.title
+
+            // var safeTitle = document.createElement('p')
+            // safeTitle.innerText = element.safe_title
+
+            // div.append(image, title, safeTitle)
+            // container.append(div)
+            
+            // // fetch for url=>3
+            // var div = document.createElement('div')
+
+            // var image = document.createElement('img')
+            // image.src = element.image
+
+            // var title = document.createElement('p')
+            // title.innerText = element.title
+
+            // var price = document.createElement('p')
+            // price.innerText = `${element.price} Rs`
+
+            // div.append(image, title, price)
+            // container.append(div)
+
+    //     });
+
+    // }
+
+
+</script>
